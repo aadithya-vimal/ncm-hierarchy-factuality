@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NCM Hierarchy Factuality Dataset Manifest Record",
+  "description": "Record layouts are split across hierarchy_outputs, claims, claim_transitions, and article_metadata tables. Raw XSum article text is private and excluded from public export.",
+  "type": "object",
+  "properties": {
+    "article_id": {"type": "string"},
+    "level_index": {"type": "integer", "minimum": 1},
+    "level_code_length": {"type": "integer", "minimum": 1},
+    "summary_text": {"type": "string"},
+    "claim_id": {"type": "string"},
+    "claim_text": {"type": "string"},
+    "label": {"enum": ["supported", "contradicted", "unresolved"]},
+    "lifecycle_transition": {"enum": ["introduced", "removed", "retained_same_label", "factuality_label_changed", "became_supported", "became_contradicted", "became_unresolved"]}
+  },
+  "additionalProperties": true
+}

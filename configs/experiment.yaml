@@ -1,0 +1,74 @@
+project:
+  name: ncm-hierarchy-factuality
+  title: "Fact Lifecycles in Next-Concept Modeling: Tracking Factual Errors Across the Summarization Hierarchy"
+  run_name: ncm-xsum-factuality-full-test-v1
+  seed: 42
+  # Runtime paths are resolved under the NCM Research parent folder unless absolute.
+  output_root: local_outputs
+
+upstream:
+  repo_url: https://github.com/HazyResearch/ncm.git
+  commit: c70274273f489abc73832b2b98584a8483b6b203
+  # The model release commit is pinned separately from the code repository.
+  checkpoint_repo_id: hazyresearch/ncm-checkpoints
+  checkpoint_revision: 7100573f83178b6e9f45ebffe0e9aa6df384e712
+  checkpoint_subdir: xsum
+  data_repo_id: hazyresearch/ncm-datasets
+  data_revision: main  # resolved to an immutable commit SHA and recorded before download
+  task: xsum
+
+data:
+  dataset_id: EdinburghNLP/xsum
+  split: test
+  source_dataset_revision: main
+  ncm_input_file: passages.pickle
+  ncm_reference_file: reference_summaries.pickle
+  # Null means the full released split (no pilot subset).
+  max_examples: null
+  min_reference_alignment: 0.99
+  positional_alignment_similarity: 0.95
+
+inference:
+  device: cuda
+  batch_size: 4
+  # Leave official checkpoint sampling and penalty defaults intact unless a preregistered
+  # experiment explicitly changes them. Values below match the released XSum config.
+  temperature: 1.0
+  top_k: 1
+  top_p: 0.0
+  cfg_scale: 0.0
+  frequency_penalty: 2.0
+  frequency_deficit: 1.0
+  adjacency_penalty: "5,4,0.5"
+  cut_at_eos: true
+
+annotation:
+  model_id: MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli
+  model_revision: eb8b17b1983bca679126ea69b12b5d28c5fe9b9a
+  cache_dir: local_outputs/cache/huggingface
+  device: auto
+  pair_batch_size: 32
+  evidence_top_k: 3
+  evidence_window_sentences: 3
+  evidence_window_stride: 2
+  entailment_threshold: 0.70
+  contradiction_threshold: 0.70
+  decision_margin: 0.10
+  # Per-evidence-pair NLI probabilities are transactionally checkpointed in SQLite.
+
+lifecycle:
+  matcher: tfidf_cosine_hungarian
+  similarity_threshold: 0.35
+
+statistics:
+  bootstrap_replicates: 2000
+  confidence_level: 0.95
+  seed: 42
+
+publishing:
+  dataset_repo_name: ncm-hierarchy-factuality-eval
+  # Fill in a real <account>/repo ID at upload time, not in the checked-in file.
+  repo_id: ""
+  repo_type: dataset
+  upload_enabled_by_default: false
+  include_full_source_text: false

@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "Please cite the software and the NCM paper if you use this repository. Replace the project-author metadata when preparing a public release."
+title: "NCM Hierarchy Factuality: Fact Lifecycles Across Summarization Hierarchies"
+version: 0.1.0
+date-released: 2026-10-22
+authors:
+  - name: "NCM Hierarchy Factuality contributors"
+repository-code: "https://github.com/<YOUR_GITHUB_USERNAME>/ncm-hierarchy-factuality"
+references:
+  - type: article
+    authors:
+      - family-names: Kumbong
+        given-names: Hermann
+      - family-names: Khare
+        given-names: Ishan S.
+      - family-names: Mlauzi
+        given-names: Iddah
+      - family-names: Woen
+        given-names: Andrew
+      - family-names: Ding
+        given-names: Charles
+      - family-names: Buchanan
+        given-names: E. Kelly
+      - family-names: Arora
+        given-names: Simran
+      - family-names: Mirhoseini
+        given-names: Azalia
+      - family-names: Ré
+        given-names: Christopher
+    title: "Next-Concept Modeling: Fast, Parallel Coarse-to-Fine Text Generation"
+    year: 2026
+    url: "https://arxiv.org/abs/2610.14162"

@@ -1,0 +1,3 @@
+[console_scripts]
+ncm-factuality-publish = ncm_factuality.huggingface_publish:main
+ncm-factuality-validate = ncm_factuality.cli:main_validate

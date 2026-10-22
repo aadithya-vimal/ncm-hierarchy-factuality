@@ -1,0 +1,14 @@
+# Named thresholds are declared here for readability; the executed configuration is
+# configs/experiment.yaml. Do not tune thresholds after inspecting the final results
+# without recording the change as a separate analysis configuration.
+claim_labels:
+  supported: "max entailment >= 0.70 and exceeds max contradiction by >= 0.10"
+  contradicted: "max contradiction >= 0.70 and exceeds max entailment by >= 0.10"
+  unresolved: "otherwise"
+claim_matching:
+  method: tfidf_cosine_hungarian
+  minimum_cosine_similarity: 0.35
+uncertainty:
+  unit: article
+  method: percentile bootstrap
+  replicates: 2000
