@@ -13,3 +13,14 @@ The dataset README deliberately describes its license scope separately from the 
 ## Secrets
 
 Use `hf auth login` or Colab Secrets for a Hugging Face token with write permission to the target dataset repository. Never commit `.env`, tokens, private data, output databases or cached model weights. The publication script reads credentials through `huggingface_hub` authentication and never prints them.
+
+## Upstream NCM dependency
+
+This project uses Next-Concept Modeling (NCM):
+- Repository: https://github.com/HazyResearch/ncm
+- Pinned commit: `c70274273f489abc73832b2b98584a8483b6b203`
+- Upstream license: MIT
+
+NCM is third-party software, not original code authored by this project. Its applicable license and copyright notices remain in force.
+
+This project's MIT license applies to its original code only. It does not automatically cover third-party model weights, datasets, or dependencies.
